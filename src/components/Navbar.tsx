@@ -1,8 +1,17 @@
 import { Link, useLocation } from "react-router-dom";
-import { ShoppingCart, Menu, X } from "lucide-react";
+import { ShoppingCart, Menu, X, User, LogOut, Package } from "lucide-react";
 import { useCart } from "@/context/CartContext";
+import { useAuth } from "@/hooks/useAuth";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 const navLinks = [
   { to: "/", label: "Beranda" },
@@ -13,6 +22,7 @@ const navLinks = [
 
 const Navbar = () => {
   const { totalItems } = useCart();
+  const { user, signOut } = useAuth();
   const location = useLocation();
   const [mobileOpen, setMobileOpen] = useState(false);
 
@@ -44,6 +54,36 @@ const Navbar = () => {
               </span>
             )}
           </Link>
+          {user ? (
+            <DropdownMenu>
+              <DropdownMenuTrigger className="h-9 w-9 rounded-full bg-primary/10 hover:bg-primary/20 flex items-center justify-center transition-colors">
+                <User className="h-4 w-4 text-primary" />
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end" className="w-56">
+                <DropdownMenuLabel className="font-normal">
+                  <div className="text-xs text-muted-foreground">Masuk sebagai</div>
+                  <div className="text-sm font-medium truncate">{user.email}</div>
+                </DropdownMenuLabel>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem asChild>
+                  <Link to="/pesanan" className="cursor-pointer">
+                    <Package className="h-4 w-4 mr-2" /> Riwayat Pesanan
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem onClick={signOut} className="cursor-pointer text-destructive focus:text-destructive">
+                  <LogOut className="h-4 w-4 mr-2" /> Keluar
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          ) : (
+            <Link
+              to="/auth"
+              className="text-sm font-medium px-4 py-2 rounded-full bg-primary text-primary-foreground hover:bg-primary/90 transition-colors"
+            >
+              Masuk
+            </Link>
+          )}
         </div>
 
         {/* Mobile */}
@@ -83,6 +123,23 @@ const Navbar = () => {
                   {link.label}
                 </Link>
               ))}
+              {user ? (
+                <>
+                  <Link to="/pesanan" onClick={() => setMobileOpen(false)} className="text-lg font-medium py-2 text-foreground/70">
+                    Riwayat Pesanan
+                  </Link>
+                  <button
+                    onClick={() => { signOut(); setMobileOpen(false); }}
+                    className="text-lg font-medium py-2 text-destructive text-left"
+                  >
+                    Keluar
+                  </button>
+                </>
+              ) : (
+                <Link to="/auth" onClick={() => setMobileOpen(false)} className="text-lg font-medium py-2 text-primary">
+                  Masuk / Daftar
+                </Link>
+              )}
             </div>
           </motion.div>
         )}

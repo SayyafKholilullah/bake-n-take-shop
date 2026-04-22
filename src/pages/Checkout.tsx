@@ -1,19 +1,93 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useCart } from "@/context/CartContext";
+import { useAuth } from "@/hooks/useAuth";
+import { supabase } from "@/integrations/supabase/client";
 import { formatPrice } from "@/data/products";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { CheckCircle } from "lucide-react";
+import { CheckCircle, Loader2 } from "lucide-react";
 import { Link } from "react-router-dom";
+import { z } from "zod";
+import { toast } from "sonner";
+
+const checkoutSchema = z.object({
+  name: z.string().trim().min(2, "Nama minimal 2 karakter").max(100),
+  phone: z.string().trim().min(8, "No. telepon tidak valid").max(20).regex(/^[0-9+\-\s()]+$/, "Format no. telepon tidak valid"),
+  address: z.string().trim().min(10, "Alamat minimal 10 karakter").max(500),
+  notes: z.string().trim().max(500).optional(),
+});
 
 const Checkout = () => {
+  const { user } = useAuth();
   const { items, totalPrice, clearCart } = useCart();
   const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [name, setName] = useState("");
+  const [phone, setPhone] = useState("");
+  const [address, setAddress] = useState("");
+  const [notes, setNotes] = useState("");
 
-  const handleSubmit = (e: React.FormEvent) => {
+  // Auto-fill from profile
+  useEffect(() => {
+    if (!user) return;
+    supabase
+      .from("profiles")
+      .select("full_name, phone, address")
+      .eq("id", user.id)
+      .maybeSingle()
+      .then(({ data }) => {
+        if (data) {
+          setName(data.full_name || "");
+          setPhone(data.phone || "");
+          setAddress(data.address || "");
+        }
+      });
+  }, [user]);
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!user) return;
+
+    const parsed = checkoutSchema.safeParse({ name, phone, address, notes });
+    if (!parsed.success) {
+      toast.error(parsed.error.errors[0].message);
+      return;
+    }
+
+    setSubmitting(true);
+    const orderItems = items.map(({ product, quantity }) => ({
+      product_id: product.id,
+      name: product.name,
+      price: product.price,
+      quantity,
+    }));
+
+    const { error } = await supabase.from("orders").insert({
+      user_id: user.id,
+      customer_name: parsed.data.name,
+      customer_phone: parsed.data.phone,
+      customer_address: parsed.data.address,
+      notes: parsed.data.notes || null,
+      items: orderItems,
+      total_price: totalPrice,
+    });
+
+    // Save profile data for next time
+    await supabase.from("profiles").upsert({
+      id: user.id,
+      full_name: parsed.data.name,
+      phone: parsed.data.phone,
+      address: parsed.data.address,
+    });
+
+    setSubmitting(false);
+    if (error) {
+      toast.error("Gagal membuat pesanan: " + error.message);
+      return;
+    }
+
     setSubmitted(true);
     clearCart();
   };
@@ -26,9 +100,14 @@ const Checkout = () => {
         <p className="text-muted-foreground mb-6 max-w-md">
           Terima kasih telah memesan di ManisBakery. Tim kami akan segera menghubungi Anda untuk konfirmasi.
         </p>
-        <Button asChild>
-          <Link to="/">Kembali ke Beranda</Link>
-        </Button>
+        <div className="flex gap-3">
+          <Button asChild variant="outline">
+            <Link to="/">Kembali ke Beranda</Link>
+          </Button>
+          <Button asChild>
+            <Link to="/pesanan">Lihat Pesanan Saya</Link>
+          </Button>
+        </div>
       </main>
     );
   }
@@ -53,22 +132,22 @@ const Checkout = () => {
             <h2 className="font-display text-xl font-semibold mb-4">Data Pemesan</h2>
             <div className="space-y-2">
               <Label htmlFor="name">Nama Lengkap</Label>
-              <Input id="name" required placeholder="Nama Anda" />
+              <Input id="name" required placeholder="Nama Anda" value={name} onChange={(e) => setName(e.target.value)} maxLength={100} />
             </div>
             <div className="space-y-2">
               <Label htmlFor="phone">No. Telepon</Label>
-              <Input id="phone" required placeholder="08xxxxxxxxxx" />
+              <Input id="phone" required placeholder="08xxxxxxxxxx" value={phone} onChange={(e) => setPhone(e.target.value)} maxLength={20} />
             </div>
             <div className="space-y-2">
               <Label htmlFor="address">Alamat Pengiriman</Label>
-              <Textarea id="address" required placeholder="Alamat lengkap..." />
+              <Textarea id="address" required placeholder="Alamat lengkap..." value={address} onChange={(e) => setAddress(e.target.value)} maxLength={500} />
             </div>
             <div className="space-y-2">
               <Label htmlFor="notes">Catatan (opsional)</Label>
-              <Textarea id="notes" placeholder="Catatan khusus untuk pesanan..." />
+              <Textarea id="notes" placeholder="Catatan khusus untuk pesanan..." value={notes} onChange={(e) => setNotes(e.target.value)} maxLength={500} />
             </div>
-            <Button type="submit" size="lg" className="w-full mt-4">
-              Konfirmasi Pesanan
+            <Button type="submit" size="lg" className="w-full mt-4" disabled={submitting}>
+              {submitting ? <Loader2 className="h-4 w-4 animate-spin" /> : "Konfirmasi Pesanan"}
             </Button>
           </form>
 
