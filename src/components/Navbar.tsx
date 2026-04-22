@@ -72,6 +72,13 @@ const Navbar = () => {
                     <Package className="h-4 w-4 mr-2" /> Riwayat Pesanan
                   </Link>
                 </DropdownMenuItem>
+                {isAdmin && (
+                  <DropdownMenuItem asChild>
+                    <Link to="/admin" className="cursor-pointer">
+                      <LayoutDashboard className="h-4 w-4 mr-2" /> Panel Admin
+                    </Link>
+                  </DropdownMenuItem>
+                )}
                 <DropdownMenuSeparator />
                 <DropdownMenuItem onClick={signOut} className="cursor-pointer text-destructive focus:text-destructive">
                   <LogOut className="h-4 w-4 mr-2" /> Keluar
@@ -130,6 +137,11 @@ const Navbar = () => {
                   <Link to="/pesanan" onClick={() => setMobileOpen(false)} className="text-lg font-medium py-2 text-foreground/70">
                     Riwayat Pesanan
                   </Link>
+                  {isAdmin && (
+                    <Link to="/admin" onClick={() => setMobileOpen(false)} className="text-lg font-medium py-2 text-primary">
+                      Panel Admin
+                    </Link>
+                  )}
                   <button
                     onClick={() => { signOut(); setMobileOpen(false); }}
                     className="text-lg font-medium py-2 text-destructive text-left"
