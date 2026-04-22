@@ -1,7 +1,8 @@
 import { Link, useLocation } from "react-router-dom";
-import { ShoppingCart, Menu, X, User, LogOut, Package } from "lucide-react";
+import { ShoppingCart, Menu, X, User, LogOut, Package, LayoutDashboard } from "lucide-react";
 import { useCart } from "@/context/CartContext";
 import { useAuth } from "@/hooks/useAuth";
+import { useUserRole } from "@/hooks/useUserRole";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
@@ -23,6 +24,7 @@ const navLinks = [
 const Navbar = () => {
   const { totalItems } = useCart();
   const { user, signOut } = useAuth();
+  const { isAdmin } = useUserRole();
   const location = useLocation();
   const [mobileOpen, setMobileOpen] = useState(false);
 
@@ -70,6 +72,13 @@ const Navbar = () => {
                     <Package className="h-4 w-4 mr-2" /> Riwayat Pesanan
                   </Link>
                 </DropdownMenuItem>
+                {isAdmin && (
+                  <DropdownMenuItem asChild>
+                    <Link to="/admin" className="cursor-pointer">
+                      <LayoutDashboard className="h-4 w-4 mr-2" /> Panel Admin
+                    </Link>
+                  </DropdownMenuItem>
+                )}
                 <DropdownMenuSeparator />
                 <DropdownMenuItem onClick={signOut} className="cursor-pointer text-destructive focus:text-destructive">
                   <LogOut className="h-4 w-4 mr-2" /> Keluar
@@ -128,6 +137,11 @@ const Navbar = () => {
                   <Link to="/pesanan" onClick={() => setMobileOpen(false)} className="text-lg font-medium py-2 text-foreground/70">
                     Riwayat Pesanan
                   </Link>
+                  {isAdmin && (
+                    <Link to="/admin" onClick={() => setMobileOpen(false)} className="text-lg font-medium py-2 text-primary">
+                      Panel Admin
+                    </Link>
+                  )}
                   <button
                     onClick={() => { signOut(); setMobileOpen(false); }}
                     className="text-lg font-medium py-2 text-destructive text-left"
