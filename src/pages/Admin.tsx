@@ -66,6 +66,12 @@ const statusColor: Record<string, string> = {
   cancelled: "bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-300",
 };
 
+const PAYMENT_LABELS: Record<string, { label: string; icon: React.ReactNode }> = {
+  qris: { label: "QRIS", icon: <QrCode className="h-3 w-3" /> },
+  bank_transfer: { label: "Transfer Bank", icon: <Landmark className="h-3 w-3" /> },
+  cod: { label: "COD", icon: <Wallet className="h-3 w-3" /> },
+};
+
 const Admin = () => {
   const [orders, setOrders] = useState<Order[]>([]);
   const [profiles, setProfiles] = useState<Profile[]>([]);
@@ -99,6 +105,17 @@ const Admin = () => {
       toast.success("Status pesanan diperbarui");
       setOrders((prev) => prev.map((o) => (o.id === id ? { ...o, status } : o)));
     }
+  };
+
+  const viewProof = async (path: string) => {
+    const { data, error } = await supabase.storage
+      .from("payment-proofs")
+      .createSignedUrl(path, 300);
+    if (error || !data) {
+      toast.error("Gagal membuka bukti pembayaran");
+      return;
+    }
+    window.open(data.signedUrl, "_blank", "noopener,noreferrer");
   };
 
   const stats = useMemo(() => {
