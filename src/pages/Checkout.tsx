@@ -7,10 +7,13 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { CheckCircle, Loader2 } from "lucide-react";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { CheckCircle, Loader2, QrCode, Landmark, Wallet, Upload, Copy } from "lucide-react";
 import { Link } from "react-router-dom";
 import { z } from "zod";
 import { toast } from "sonner";
+import qrisImage from "@/assets/qris-placeholder.png";
+import { BANK_ACCOUNTS, QRIS_MERCHANT } from "@/data/payment-info";
 
 const checkoutSchema = z.object({
   name: z.string().trim().min(2, "Nama minimal 2 karakter").max(100),
@@ -18,6 +21,8 @@ const checkoutSchema = z.object({
   address: z.string().trim().min(10, "Alamat minimal 10 karakter").max(500),
   notes: z.string().trim().max(500).optional(),
 });
+
+type PaymentMethod = "qris" | "bank_transfer" | "cod";
 
 const Checkout = () => {
   const { user } = useAuth();
@@ -28,6 +33,8 @@ const Checkout = () => {
   const [phone, setPhone] = useState("");
   const [address, setAddress] = useState("");
   const [notes, setNotes] = useState("");
+  const [paymentMethod, setPaymentMethod] = useState<PaymentMethod>("qris");
+  const [proofFile, setProofFile] = useState<File | null>(null);
 
   // Auto-fill from profile
   useEffect(() => {
