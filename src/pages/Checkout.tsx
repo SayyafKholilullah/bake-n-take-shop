@@ -189,6 +189,61 @@ const Checkout = () => {
               <Label htmlFor="notes">Catatan (opsional)</Label>
               <Textarea id="notes" placeholder="Catatan khusus untuk pesanan..." value={notes} onChange={(e) => setNotes(e.target.value)} maxLength={500} />
             </div>
+
+            {/* Payment method */}
+            <div className="space-y-3 pt-2">
+              <Label>Metode Pembayaran</Label>
+              <RadioGroup value={paymentMethod} onValueChange={(v) => { setPaymentMethod(v as PaymentMethod); setProofFile(null); }} className="grid gap-2">
+                <PaymentOption value="qris" icon={<QrCode className="h-4 w-4" />} label="QRIS" desc="Scan QR, transfer, lalu upload bukti" />
+                <PaymentOption value="bank_transfer" icon={<Landmark className="h-4 w-4" />} label="Transfer Bank" desc="Transfer manual ke rekening kami" />
+                <PaymentOption value="cod" icon={<Wallet className="h-4 w-4" />} label="Bayar di Tempat (COD)" desc="Bayar tunai saat pesanan diterima" />
+              </RadioGroup>
+            </div>
+
+            {/* Payment instructions */}
+            {paymentMethod === "qris" && (
+              <div className="rounded-xl border bg-muted/30 p-4 space-y-3">
+                <p className="text-sm font-medium">Scan QRIS berikut, transfer sebesar <span className="font-bold text-primary">{formatPrice(totalPrice)}</span></p>
+                <div className="flex justify-center bg-background rounded-lg p-3 border">
+                  <img src={qrisImage} alt="QRIS ManisBakery" width={200} height={250} loading="lazy" className="max-w-[200px]" />
+                </div>
+                <p className="text-xs text-muted-foreground text-center">{QRIS_MERCHANT.name} · NMID: {QRIS_MERCHANT.nmid}</p>
+              </div>
+            )}
+
+            {paymentMethod === "bank_transfer" && (
+              <div className="rounded-xl border bg-muted/30 p-4 space-y-3">
+                <p className="text-sm">Transfer sebesar <span className="font-bold text-primary">{formatPrice(totalPrice)}</span> ke salah satu rekening berikut:</p>
+                <div className="space-y-2">
+                  {BANK_ACCOUNTS.map((b) => (
+                    <div key={b.bank} className="flex items-center justify-between bg-background rounded-lg p-3 border">
+                      <div>
+                        <div className="text-xs text-muted-foreground">{b.bank} a.n. {b.holder}</div>
+                        <div className="font-mono font-semibold">{b.number}</div>
+                      </div>
+                      <Button type="button" size="icon" variant="ghost" onClick={() => { navigator.clipboard.writeText(b.number); toast.success("No. rekening disalin"); }}>
+                        <Copy className="h-4 w-4" />
+                      </Button>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {paymentMethod !== "cod" && (
+              <div className="space-y-2">
+                <Label htmlFor="proof">Upload Bukti Pembayaran</Label>
+                <div className="relative">
+                  <Input id="proof" type="file" accept="image/*" onChange={(e) => setProofFile(e.target.files?.[0] ?? null)} />
+                </div>
+                {proofFile && (
+                  <p className="text-xs text-muted-foreground flex items-center gap-1">
+                    <Upload className="h-3 w-3" /> {proofFile.name} ({(proofFile.size / 1024).toFixed(0)} KB)
+                  </p>
+                )}
+              </div>
+            )}
+
             <Button type="submit" size="lg" className="w-full mt-4" disabled={submitting}>
               {submitting ? <Loader2 className="h-4 w-4 animate-spin" /> : "Konfirmasi Pesanan"}
             </Button>
