@@ -21,6 +21,7 @@ interface Order {
   status: string;
   items: OrderItem[];
   created_at: string;
+  payment_method: string;
 }
 
 const statusLabel: Record<string, string> = {
@@ -28,6 +29,12 @@ const statusLabel: Record<string, string> = {
   confirmed: "Dikonfirmasi",
   delivered: "Selesai",
   cancelled: "Dibatalkan",
+};
+
+const paymentLabel: Record<string, string> = {
+  qris: "QRIS",
+  bank_transfer: "Transfer Bank",
+  cod: "Bayar di Tempat",
 };
 
 const Orders = () => {
@@ -109,6 +116,9 @@ const Orders = () => {
               <div className="border-t mt-3 pt-3 flex justify-between font-bold">
                 <span>Total</span>
                 <span>{formatPrice(Number(order.total_price))}</span>
+              </div>
+              <div className="mt-1 text-xs text-muted-foreground text-right">
+                Metode: {paymentLabel[order.payment_method] ?? order.payment_method}
               </div>
             </div>
           ))}
