@@ -19,6 +19,8 @@ import {
 } from "@/components/ui/table";
 import { Loader2, Package, Users, TrendingUp, ShoppingBag } from "lucide-react";
 import { toast } from "sonner";
+import { Button } from "@/components/ui/button";
+import { Eye, QrCode, Landmark, Wallet } from "lucide-react";
 
 interface OrderItem {
   product_id: string;
@@ -38,6 +40,8 @@ interface Order {
   status: string;
   items: OrderItem[];
   created_at: string;
+  payment_method: string;
+  payment_proof_url: string | null;
 }
 
 interface Profile {
