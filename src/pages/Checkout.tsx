@@ -63,7 +63,41 @@ const Checkout = () => {
       return;
     }
 
+    // Require proof for QRIS / Bank Transfer
+    if (paymentMethod !== "cod" && !proofFile) {
+      toast.error("Mohon upload bukti pembayaran terlebih dahulu");
+      return;
+    }
+
+    if (proofFile) {
+      if (proofFile.size > 5 * 1024 * 1024) {
+        toast.error("Ukuran file maksimal 5MB");
+        return;
+      }
+      if (!proofFile.type.startsWith("image/")) {
+        toast.error("File bukti harus berupa gambar");
+        return;
+      }
+    }
+
     setSubmitting(true);
+
+    // Upload proof if any
+    let proofUrl: string | null = null;
+    if (proofFile) {
+      const ext = proofFile.name.split(".").pop() || "jpg";
+      const path = `${user.id}/${Date.now()}.${ext}`;
+      const { error: uploadError } = await supabase.storage
+        .from("payment-proofs")
+        .upload(path, proofFile, { contentType: proofFile.type, upsert: false });
+      if (uploadError) {
+        setSubmitting(false);
+        toast.error("Gagal upload bukti: " + uploadError.message);
+        return;
+      }
+      proofUrl = path;
+    }
+
     const orderItems = items.map(({ product, quantity }) => ({
       product_id: product.id,
       name: product.name,
@@ -79,6 +113,8 @@ const Checkout = () => {
       notes: parsed.data.notes || null,
       items: orderItems,
       total_price: totalPrice,
+      payment_method: paymentMethod,
+      payment_proof_url: proofUrl,
     });
 
     // Save profile data for next time
