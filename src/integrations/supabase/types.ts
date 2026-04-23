@@ -23,6 +23,8 @@ export type Database = {
           id: string
           items: Json
           notes: string | null
+          payment_method: string
+          payment_proof_url: string | null
           status: string
           total_price: number
           user_id: string
@@ -35,6 +37,8 @@ export type Database = {
           id?: string
           items: Json
           notes?: string | null
+          payment_method?: string
+          payment_proof_url?: string | null
           status?: string
           total_price: number
           user_id: string
@@ -47,6 +51,8 @@ export type Database = {
           id?: string
           items?: Json
           notes?: string | null
+          payment_method?: string
+          payment_proof_url?: string | null
           status?: string
           total_price?: number
           user_id?: string

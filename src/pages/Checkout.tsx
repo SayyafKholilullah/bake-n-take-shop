@@ -7,10 +7,14 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { CheckCircle, Loader2 } from "lucide-react";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { cn } from "@/lib/utils";
+import { CheckCircle, Loader2, QrCode, Landmark, Wallet, Upload, Copy } from "lucide-react";
 import { Link } from "react-router-dom";
 import { z } from "zod";
 import { toast } from "sonner";
+import qrisImage from "@/assets/qris-placeholder.png";
+import { BANK_ACCOUNTS, QRIS_MERCHANT } from "@/data/payment-info";
 
 const checkoutSchema = z.object({
   name: z.string().trim().min(2, "Nama minimal 2 karakter").max(100),
@@ -18,6 +22,8 @@ const checkoutSchema = z.object({
   address: z.string().trim().min(10, "Alamat minimal 10 karakter").max(500),
   notes: z.string().trim().max(500).optional(),
 });
+
+type PaymentMethod = "qris" | "bank_transfer" | "cod";
 
 const Checkout = () => {
   const { user } = useAuth();
@@ -28,6 +34,8 @@ const Checkout = () => {
   const [phone, setPhone] = useState("");
   const [address, setAddress] = useState("");
   const [notes, setNotes] = useState("");
+  const [paymentMethod, setPaymentMethod] = useState<PaymentMethod>("qris");
+  const [proofFile, setProofFile] = useState<File | null>(null);
 
   // Auto-fill from profile
   useEffect(() => {
@@ -56,7 +64,41 @@ const Checkout = () => {
       return;
     }
 
+    // Require proof for QRIS / Bank Transfer
+    if (paymentMethod !== "cod" && !proofFile) {
+      toast.error("Mohon upload bukti pembayaran terlebih dahulu");
+      return;
+    }
+
+    if (proofFile) {
+      if (proofFile.size > 5 * 1024 * 1024) {
+        toast.error("Ukuran file maksimal 5MB");
+        return;
+      }
+      if (!proofFile.type.startsWith("image/")) {
+        toast.error("File bukti harus berupa gambar");
+        return;
+      }
+    }
+
     setSubmitting(true);
+
+    // Upload proof if any
+    let proofUrl: string | null = null;
+    if (proofFile) {
+      const ext = proofFile.name.split(".").pop() || "jpg";
+      const path = `${user.id}/${Date.now()}.${ext}`;
+      const { error: uploadError } = await supabase.storage
+        .from("payment-proofs")
+        .upload(path, proofFile, { contentType: proofFile.type, upsert: false });
+      if (uploadError) {
+        setSubmitting(false);
+        toast.error("Gagal upload bukti: " + uploadError.message);
+        return;
+      }
+      proofUrl = path;
+    }
+
     const orderItems = items.map(({ product, quantity }) => ({
       product_id: product.id,
       name: product.name,
@@ -72,6 +114,8 @@ const Checkout = () => {
       notes: parsed.data.notes || null,
       items: orderItems,
       total_price: totalPrice,
+      payment_method: paymentMethod,
+      payment_proof_url: proofUrl,
     });
 
     // Save profile data for next time
@@ -146,6 +190,61 @@ const Checkout = () => {
               <Label htmlFor="notes">Catatan (opsional)</Label>
               <Textarea id="notes" placeholder="Catatan khusus untuk pesanan..." value={notes} onChange={(e) => setNotes(e.target.value)} maxLength={500} />
             </div>
+
+            {/* Payment method */}
+            <div className="space-y-3 pt-2">
+              <Label>Metode Pembayaran</Label>
+              <RadioGroup value={paymentMethod} onValueChange={(v) => { setPaymentMethod(v as PaymentMethod); setProofFile(null); }} className="grid gap-2">
+                <PaymentOption value="qris" icon={<QrCode className="h-4 w-4" />} label="QRIS" desc="Scan QR, transfer, lalu upload bukti" />
+                <PaymentOption value="bank_transfer" icon={<Landmark className="h-4 w-4" />} label="Transfer Bank" desc="Transfer manual ke rekening kami" />
+                <PaymentOption value="cod" icon={<Wallet className="h-4 w-4" />} label="Bayar di Tempat (COD)" desc="Bayar tunai saat pesanan diterima" />
+              </RadioGroup>
+            </div>
+
+            {/* Payment instructions */}
+            {paymentMethod === "qris" && (
+              <div className="rounded-xl border bg-muted/30 p-4 space-y-3">
+                <p className="text-sm font-medium">Scan QRIS berikut, transfer sebesar <span className="font-bold text-primary">{formatPrice(totalPrice)}</span></p>
+                <div className="flex justify-center bg-background rounded-lg p-3 border">
+                  <img src={qrisImage} alt="QRIS ManisBakery" width={200} height={250} loading="lazy" className="max-w-[200px]" />
+                </div>
+                <p className="text-xs text-muted-foreground text-center">{QRIS_MERCHANT.name} · NMID: {QRIS_MERCHANT.nmid}</p>
+              </div>
+            )}
+
+            {paymentMethod === "bank_transfer" && (
+              <div className="rounded-xl border bg-muted/30 p-4 space-y-3">
+                <p className="text-sm">Transfer sebesar <span className="font-bold text-primary">{formatPrice(totalPrice)}</span> ke salah satu rekening berikut:</p>
+                <div className="space-y-2">
+                  {BANK_ACCOUNTS.map((b) => (
+                    <div key={b.bank} className="flex items-center justify-between bg-background rounded-lg p-3 border">
+                      <div>
+                        <div className="text-xs text-muted-foreground">{b.bank} a.n. {b.holder}</div>
+                        <div className="font-mono font-semibold">{b.number}</div>
+                      </div>
+                      <Button type="button" size="icon" variant="ghost" onClick={() => { navigator.clipboard.writeText(b.number); toast.success("No. rekening disalin"); }}>
+                        <Copy className="h-4 w-4" />
+                      </Button>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {paymentMethod !== "cod" && (
+              <div className="space-y-2">
+                <Label htmlFor="proof">Upload Bukti Pembayaran</Label>
+                <div className="relative">
+                  <Input id="proof" type="file" accept="image/*" onChange={(e) => setProofFile(e.target.files?.[0] ?? null)} />
+                </div>
+                {proofFile && (
+                  <p className="text-xs text-muted-foreground flex items-center gap-1">
+                    <Upload className="h-3 w-3" /> {proofFile.name} ({(proofFile.size / 1024).toFixed(0)} KB)
+                  </p>
+                )}
+              </div>
+            )}
+
             <Button type="submit" size="lg" className="w-full mt-4" disabled={submitting}>
               {submitting ? <Loader2 className="h-4 w-4 animate-spin" /> : "Konfirmasi Pesanan"}
             </Button>
@@ -171,5 +270,24 @@ const Checkout = () => {
     </main>
   );
 };
+
+const PaymentOption = ({ value, icon, label, desc }: { value: string; icon: React.ReactNode; label: string; desc: string }) => (
+  <label
+    htmlFor={`pm-${value}`}
+    className={cn(
+      "flex items-start gap-3 rounded-lg border p-3 cursor-pointer transition-colors",
+      "hover:bg-accent has-[:checked]:border-primary has-[:checked]:bg-primary/5"
+    )}
+  >
+    <RadioGroupItem value={value} id={`pm-${value}`} className="mt-1" />
+    <div className="flex-1">
+      <div className="flex items-center gap-2 font-medium text-sm">
+        {icon}
+        {label}
+      </div>
+      <p className="text-xs text-muted-foreground mt-0.5">{desc}</p>
+    </div>
+  </label>
+);
 
 export default Checkout;

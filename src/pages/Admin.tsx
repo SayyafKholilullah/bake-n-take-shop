@@ -19,6 +19,8 @@ import {
 } from "@/components/ui/table";
 import { Loader2, Package, Users, TrendingUp, ShoppingBag } from "lucide-react";
 import { toast } from "sonner";
+import { Button } from "@/components/ui/button";
+import { Eye, QrCode, Landmark, Wallet } from "lucide-react";
 
 interface OrderItem {
   product_id: string;
@@ -38,6 +40,8 @@ interface Order {
   status: string;
   items: OrderItem[];
   created_at: string;
+  payment_method: string;
+  payment_proof_url: string | null;
 }
 
 interface Profile {
@@ -60,6 +64,12 @@ const statusColor: Record<string, string> = {
   confirmed: "bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-300",
   delivered: "bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-300",
   cancelled: "bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-300",
+};
+
+const PAYMENT_LABELS: Record<string, { label: string; icon: React.ReactNode }> = {
+  qris: { label: "QRIS", icon: <QrCode className="h-3 w-3" /> },
+  bank_transfer: { label: "Transfer Bank", icon: <Landmark className="h-3 w-3" /> },
+  cod: { label: "COD", icon: <Wallet className="h-3 w-3" /> },
 };
 
 const Admin = () => {
@@ -95,6 +105,17 @@ const Admin = () => {
       toast.success("Status pesanan diperbarui");
       setOrders((prev) => prev.map((o) => (o.id === id ? { ...o, status } : o)));
     }
+  };
+
+  const viewProof = async (path: string) => {
+    const { data, error } = await supabase.storage
+      .from("payment-proofs")
+      .createSignedUrl(path, 300);
+    if (error || !data) {
+      toast.error("Gagal membuka bukti pembayaran");
+      return;
+    }
+    window.open(data.signedUrl, "_blank", "noopener,noreferrer");
   };
 
   const stats = useMemo(() => {
@@ -167,13 +188,14 @@ const Admin = () => {
                       <TableHead>Pelanggan</TableHead>
                       <TableHead>Item</TableHead>
                       <TableHead className="text-right">Total</TableHead>
+                      <TableHead>Pembayaran</TableHead>
                       <TableHead>Status</TableHead>
                     </TableRow>
                   </TableHeader>
                   <TableBody>
                     {orders.length === 0 && (
                       <TableRow>
-                        <TableCell colSpan={5} className="text-center text-muted-foreground py-8">
+                        <TableCell colSpan={6} className="text-center text-muted-foreground py-8">
                           Belum ada pesanan
                         </TableCell>
                       </TableRow>
@@ -199,6 +221,21 @@ const Admin = () => {
                         </TableCell>
                         <TableCell className="text-right font-bold whitespace-nowrap">
                           {formatPrice(Number(o.total_price))}
+                        </TableCell>
+                        <TableCell>
+                          <div className="flex items-center gap-1 text-xs font-medium mb-1">
+                            {PAYMENT_LABELS[o.payment_method]?.icon}
+                            {PAYMENT_LABELS[o.payment_method]?.label ?? o.payment_method}
+                          </div>
+                          {o.payment_proof_url ? (
+                            <Button size="sm" variant="outline" className="h-7 text-xs gap-1" onClick={() => viewProof(o.payment_proof_url!)}>
+                              <Eye className="h-3 w-3" /> Bukti
+                            </Button>
+                          ) : o.payment_method === "cod" ? (
+                            <span className="text-xs text-muted-foreground">—</span>
+                          ) : (
+                            <span className="text-xs text-destructive">Tanpa bukti</span>
+                          )}
                         </TableCell>
                         <TableCell>
                           <Select value={o.status} onValueChange={(v) => updateStatus(o.id, v)}>
