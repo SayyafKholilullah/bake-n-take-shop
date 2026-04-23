@@ -271,4 +271,23 @@ const Checkout = () => {
   );
 };
 
+const PaymentOption = ({ value, icon, label, desc }: { value: string; icon: React.ReactNode; label: string; desc: string }) => (
+  <label
+    htmlFor={`pm-${value}`}
+    className={cn(
+      "flex items-start gap-3 rounded-lg border p-3 cursor-pointer transition-colors",
+      "hover:bg-accent has-[:checked]:border-primary has-[:checked]:bg-primary/5"
+    )}
+  >
+    <RadioGroupItem value={value} id={`pm-${value}`} className="mt-1" />
+    <div className="flex-1">
+      <div className="flex items-center gap-2 font-medium text-sm">
+        {icon}
+        {label}
+      </div>
+      <p className="text-xs text-muted-foreground mt-0.5">{desc}</p>
+    </div>
+  </label>
+);
+
 export default Checkout;
