@@ -188,13 +188,14 @@ const Admin = () => {
                       <TableHead>Pelanggan</TableHead>
                       <TableHead>Item</TableHead>
                       <TableHead className="text-right">Total</TableHead>
+                      <TableHead>Pembayaran</TableHead>
                       <TableHead>Status</TableHead>
                     </TableRow>
                   </TableHeader>
                   <TableBody>
                     {orders.length === 0 && (
                       <TableRow>
-                        <TableCell colSpan={5} className="text-center text-muted-foreground py-8">
+                        <TableCell colSpan={6} className="text-center text-muted-foreground py-8">
                           Belum ada pesanan
                         </TableCell>
                       </TableRow>
@@ -220,6 +221,21 @@ const Admin = () => {
                         </TableCell>
                         <TableCell className="text-right font-bold whitespace-nowrap">
                           {formatPrice(Number(o.total_price))}
+                        </TableCell>
+                        <TableCell>
+                          <div className="flex items-center gap-1 text-xs font-medium mb-1">
+                            {PAYMENT_LABELS[o.payment_method]?.icon}
+                            {PAYMENT_LABELS[o.payment_method]?.label ?? o.payment_method}
+                          </div>
+                          {o.payment_proof_url ? (
+                            <Button size="sm" variant="outline" className="h-7 text-xs gap-1" onClick={() => viewProof(o.payment_proof_url!)}>
+                              <Eye className="h-3 w-3" /> Bukti
+                            </Button>
+                          ) : o.payment_method === "cod" ? (
+                            <span className="text-xs text-muted-foreground">—</span>
+                          ) : (
+                            <span className="text-xs text-destructive">Tanpa bukti</span>
+                          )}
                         </TableCell>
                         <TableCell>
                           <Select value={o.status} onValueChange={(v) => updateStatus(o.id, v)}>
