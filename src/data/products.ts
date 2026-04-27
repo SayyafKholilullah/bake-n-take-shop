@@ -117,7 +117,7 @@ export const products: Product[] = [
     name: "Carrot Walnut Cake",
     price: 265000,
     category: "kue-ulang-tahun",
-    image: cakeStrawberry,
+    image: pCarrotCake,
     description: "Kue wortel dengan kenari dan cream cheese frosting.",
   },
   {
@@ -149,7 +149,7 @@ export const products: Product[] = [
     name: "Matcha Green Tea Cake",
     price: 360000,
     category: "kue-ulang-tahun",
-    image: cakeRedvelvet,
+    image: pMatchaCake,
     description: "Kue matcha premium Jepang dengan azuki bean.",
   },
   {
@@ -173,7 +173,7 @@ export const products: Product[] = [
     name: "Salted Caramel Cake",
     price: 255000,
     category: "kue-ulang-tahun",
-    image: cakeRedvelvet,
+    image: pSaltedCaramel,
     description: "Lapisan caramel asin dengan butter cake lembut.",
     bestseller: true,
   },
@@ -198,7 +198,7 @@ export const products: Product[] = [
     name: "Blueberry Cheesecake",
     price: 250000,
     category: "kue-ulang-tahun",
-    image: cakeRedvelvet,
+    image: pBlueberryCheesecake,
     description: "Cheesecake klasik dengan topping blueberry segar.",
   },
   {
