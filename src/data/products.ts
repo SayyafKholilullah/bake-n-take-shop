@@ -135,7 +135,7 @@ export const products: Product[] = [
     name: "Lemon Drizzle",
     price: 280000,
     category: "kue-ulang-tahun",
-    image: cakeChocolate,
+    image: pLemonDrizzle,
     description: "Kue lemon segar dengan glaze manis-asam.",
   },
   {
@@ -151,7 +151,7 @@ export const products: Product[] = [
     name: "Mocha Praline",
     price: 360000,
     category: "kue-ulang-tahun",
-    image: cakeRedvelvet,
+    image: pMochaPraline,
     description: "Kue mocha dengan praline kacang dan ganache.",
   },
   {
@@ -159,7 +159,7 @@ export const products: Product[] = [
     name: "Vanilla Bean Bliss",
     price: 260000,
     category: "kue-ulang-tahun",
-    image: cakeChocolate,
+    image: pVanillaBean,
     description: "Vanilla bean asli Madagascar dengan buttercream halus.",
   },
   {
@@ -167,7 +167,7 @@ export const products: Product[] = [
     name: "Funfetti Birthday",
     price: 350000,
     category: "kue-ulang-tahun",
-    image: cakeStrawberry,
+    image: pFunfetti,
     description: "Kue ulang tahun penuh sprinkles warna-warni.",
   },
   {
@@ -183,7 +183,7 @@ export const products: Product[] = [
     name: "Pandan Coconut Cake",
     price: 385000,
     category: "kue-ulang-tahun",
-    image: cakeChocolate,
+    image: pPandanCoconut,
     description: "Kue pandan harum dengan kelapa parut segar.",
   },
   {
@@ -191,7 +191,7 @@ export const products: Product[] = [
     name: "Cookies & Cream",
     price: 330000,
     category: "kue-ulang-tahun",
-    image: cakeStrawberry,
+    image: pCookiesCream,
     description: "Kue dengan remahan cookies oreo dan vanilla cream.",
   },
   {
@@ -208,7 +208,7 @@ export const products: Product[] = [
     name: "Hazelnut Ferrero Cake",
     price: 335000,
     category: "kue-ulang-tahun",
-    image: cakeChocolate,
+    image: pHazelnutFerrero,
     description: "Kue hazelnut dengan Ferrero Rocher di atasnya.",
   },
   {
@@ -216,7 +216,7 @@ export const products: Product[] = [
     name: "Mango Passion Cake",
     price: 310000,
     category: "kue-ulang-tahun",
-    image: cakeStrawberry,
+    image: pMangoPassion,
     description: "Mangga dan markisa dengan sponge ringan.",
   },
   {
@@ -256,7 +256,7 @@ export const products: Product[] = [
     name: "Chocolate Lava Heart",
     price: 280000,
     category: "kue-ulang-tahun",
-    image: cakeChocolate,
+    image: pLavaHeart,
     description: "Kue cokelat dengan lava lumer di tengah.",
   },
   {
