@@ -6,6 +6,32 @@ import breadSourdough from "@/assets/bread-sourdough.jpg";
 import cakeRedvelvet from "@/assets/cake-redvelvet.jpg";
 import cakeTiramisu from "@/assets/cake-tiramisu.jpg";
 import cookiesButter from "@/assets/cookies-butter.jpg";
+// New unique product photos (Modern Bold style)
+import pChocolateDream from "@/assets/p-chocolate-dream.jpg";
+import pStrawberryShortcake from "@/assets/p-strawberry-shortcake.jpg";
+import pTiramisuCake from "@/assets/p-tiramisu-cake.jpg";
+import pSaltedCaramel from "@/assets/p-salted-caramel.jpg";
+import pRedvelvetClassic from "@/assets/p-redvelvet-classic.jpg";
+import pMatchaCake from "@/assets/p-matcha-cake.jpg";
+import pBlackforest from "@/assets/p-blackforest.jpg";
+import pRainbowCake from "@/assets/p-rainbow-cake.jpg";
+import pCarrotCake from "@/assets/p-carrot-cake.jpg";
+import pBlueberryCheesecake from "@/assets/p-blueberry-cheesecake.jpg";
+import pButterCroissant from "@/assets/p-butter-croissant.jpg";
+import pPainChocolat from "@/assets/p-pain-chocolat.jpg";
+import pEclairChocolate from "@/assets/p-eclair-chocolate.jpg";
+import pFruitTart from "@/assets/p-fruit-tart.jpg";
+import pCinnamonRoll from "@/assets/p-cinnamon-roll.jpg";
+import pSourdough from "@/assets/p-sourdough.jpg";
+import pRyeBread from "@/assets/p-rye-bread.jpg";
+import pBaguette from "@/assets/p-baguette.jpg";
+import pFocaccia from "@/assets/p-focaccia.jpg";
+import pMacaronBox from "@/assets/p-macaron-box.jpg";
+import pChocchipCookies from "@/assets/p-chocchip-cookies.jpg";
+import pMatchaCookies from "@/assets/p-matcha-cookies.jpg";
+import pButterCookies from "@/assets/p-butter-cookies.jpg";
+import pBiscotti from "@/assets/p-biscotti.jpg";
+import pMadeleine from "@/assets/p-madeleine.jpg";
 
 export type Category = "kue-ulang-tahun" | "pastry" | "roti" | "kue-kering";
 
