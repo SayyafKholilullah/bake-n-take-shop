@@ -337,7 +337,7 @@ export const products: Product[] = [
     name: "Almond Croissant",
     price: 55000,
     category: "pastry",
-    image: cakeTiramisu,
+    image: pAlmondCroissant,
     description: "Croissant dengan filling almond cream dan irisan almond.",
   },
   {
@@ -362,7 +362,7 @@ export const products: Product[] = [
     name: "Apple Turnover",
     price: 70000,
     category: "pastry",
-    image: pastryCroissant,
+    image: pAppleTurnover,
     description: "Pastry isi apel kayu manis yang hangat.",
   },
   {
@@ -370,7 +370,7 @@ export const products: Product[] = [
     name: "Cheese Danish",
     price: 45000,
     category: "pastry",
-    image: cakeTiramisu,
+    image: pCheeseDanish,
     description: "Danish dengan cream cheese dan glaze vanilla.",
   },
   {
@@ -395,7 +395,7 @@ export const products: Product[] = [
     name: "Vanilla Mille-feuille",
     price: 25000,
     category: "pastry",
-    image: pastryCroissant,
+    image: pMillefeuille,
     description: "Pastry tiga lapis dengan vanilla cream.",
   },
   {
@@ -427,7 +427,7 @@ export const products: Product[] = [
     name: "Lemon Meringue Tart",
     price: 80000,
     category: "pastry",
-    image: pastryCroissant,
+    image: pLemonMeringue,
     description: "Tart lemon dengan meringue panggang.",
   },
   {
