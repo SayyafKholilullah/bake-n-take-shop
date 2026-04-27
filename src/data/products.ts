@@ -32,6 +32,32 @@ import pMatchaCookies from "@/assets/p-matcha-cookies.jpg";
 import pButterCookies from "@/assets/p-butter-cookies.jpg";
 import pBiscotti from "@/assets/p-biscotti.jpg";
 import pMadeleine from "@/assets/p-madeleine.jpg";
+// Batch 2 — 25 more unique photos
+import pLemonDrizzle from "@/assets/p-lemon-drizzle.jpg";
+import pMochaPraline from "@/assets/p-mocha-praline.jpg";
+import pVanillaBean from "@/assets/p-vanilla-bean.jpg";
+import pFunfetti from "@/assets/p-funfetti.jpg";
+import pPandanCoconut from "@/assets/p-pandan-coconut.jpg";
+import pCookiesCream from "@/assets/p-cookies-cream.jpg";
+import pHazelnutFerrero from "@/assets/p-hazelnut-ferrero.jpg";
+import pMangoPassion from "@/assets/p-mango-passion.jpg";
+import pLavaHeart from "@/assets/p-lava-heart.jpg";
+import pAlmondCroissant from "@/assets/p-almond-croissant.jpg";
+import pAppleTurnover from "@/assets/p-apple-turnover.jpg";
+import pCheeseDanish from "@/assets/p-cheese-danish.jpg";
+import pMillefeuille from "@/assets/p-millefeuille.jpg";
+import pLemonMeringue from "@/assets/p-lemon-meringue.jpg";
+import pWholewheat from "@/assets/p-wholewheat.jpg";
+import pBrioche from "@/assets/p-brioche.jpg";
+import pShokupan from "@/assets/p-shokupan.jpg";
+import pPretzel from "@/assets/p-pretzel.jpg";
+import pOatmealRaisin from "@/assets/p-oatmeal-raisin.jpg";
+import pShortbread from "@/assets/p-shortbread.jpg";
+import pGingerbread from "@/assets/p-gingerbread.jpg";
+import pSnowball from "@/assets/p-snowball.jpg";
+import pLinzer from "@/assets/p-linzer.jpg";
+import pCoconutMacaroon from "@/assets/p-coconut-macaroon.jpg";
+import pBrownieCookies from "@/assets/p-brownie-cookies.jpg";
 
 export type Category = "kue-ulang-tahun" | "pastry" | "roti" | "kue-kering";
 
