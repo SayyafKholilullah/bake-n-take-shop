@@ -540,7 +540,7 @@ export const products: Product[] = [
     name: "Whole Wheat Loaf",
     price: 55000,
     category: "roti",
-    image: breadSourdough,
+    image: pWholewheat,
     description: "Roti gandum utuh sehat dengan biji-bijian.",
   },
   {
@@ -573,7 +573,7 @@ export const products: Product[] = [
     name: "Brioche Loaf",
     price: 40000,
     category: "roti",
-    image: breadSourdough,
+    image: pBrioche,
     description: "Brioche butter yang lembut dan kaya.",
   },
   {
@@ -637,7 +637,7 @@ export const products: Product[] = [
     name: "Milk Bread Japanese",
     price: 35000,
     category: "roti",
-    image: breadSourdough,
+    image: pShokupan,
     description: "Shokupan Jepang yang super lembut.",
   },
   {
@@ -661,7 +661,7 @@ export const products: Product[] = [
     name: "Pretzel Soft",
     price: 40000,
     category: "roti",
-    image: breadSourdough,
+    image: pPretzel,
     description: "Pretzel lembut dengan garam laut.",
   },
   {
