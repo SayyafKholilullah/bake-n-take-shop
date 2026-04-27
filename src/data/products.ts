@@ -719,7 +719,7 @@ export const products: Product[] = [
     name: "Oatmeal Raisin",
     price: 110000,
     category: "kue-kering",
-    image: cookiesButter,
+    image: pOatmealRaisin,
     description: "Oatmeal cookies dengan kismis manis.",
   },
   {
@@ -727,7 +727,7 @@ export const products: Product[] = [
     name: "Shortbread Scottish",
     price: 80000,
     category: "kue-kering",
-    image: cakeMacaron,
+    image: pShortbread,
     description: "Shortbread Skotlandia yang renyah.",
   },
   {
@@ -767,7 +767,7 @@ export const products: Product[] = [
     name: "Gingerbread Cookies",
     price: 95000,
     category: "kue-kering",
-    image: cookiesButter,
+    image: pGingerbread,
     description: "Cookies jahe dengan icing hias.",
   },
   {
@@ -775,7 +775,7 @@ export const products: Product[] = [
     name: "Snowball Cookies",
     price: 165000,
     category: "kue-kering",
-    image: cakeMacaron,
+    image: pSnowball,
     description: "Cookies bulat dengan icing sugar.",
   },
   {
@@ -783,7 +783,7 @@ export const products: Product[] = [
     name: "Linzer Cookies",
     price: 160000,
     category: "kue-kering",
-    image: cookiesButter,
+    image: pLinzer,
     description: "Linzer dengan jam raspberry di tengah.",
   },
   {
@@ -840,7 +840,7 @@ export const products: Product[] = [
     name: "Coconut Macaroon",
     price: 90000,
     category: "kue-kering",
-    image: cakeMacaron,
+    image: pCoconutMacaroon,
     description: "Macaroon kelapa dengan dasar cokelat.",
   },
   {
@@ -888,7 +888,7 @@ export const products: Product[] = [
     name: "Brownie Cookies",
     price: 165000,
     category: "kue-kering",
-    image: cakeMacaron,
+    image: pBrownieCookies,
     description: "Cookies brownie fudgy dan chewy.",
   },
 ];
