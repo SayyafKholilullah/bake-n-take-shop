@@ -32,6 +32,32 @@ import pMatchaCookies from "@/assets/p-matcha-cookies.jpg";
 import pButterCookies from "@/assets/p-butter-cookies.jpg";
 import pBiscotti from "@/assets/p-biscotti.jpg";
 import pMadeleine from "@/assets/p-madeleine.jpg";
+// Batch 2 — 25 more unique photos
+import pLemonDrizzle from "@/assets/p-lemon-drizzle.jpg";
+import pMochaPraline from "@/assets/p-mocha-praline.jpg";
+import pVanillaBean from "@/assets/p-vanilla-bean.jpg";
+import pFunfetti from "@/assets/p-funfetti.jpg";
+import pPandanCoconut from "@/assets/p-pandan-coconut.jpg";
+import pCookiesCream from "@/assets/p-cookies-cream.jpg";
+import pHazelnutFerrero from "@/assets/p-hazelnut-ferrero.jpg";
+import pMangoPassion from "@/assets/p-mango-passion.jpg";
+import pLavaHeart from "@/assets/p-lava-heart.jpg";
+import pAlmondCroissant from "@/assets/p-almond-croissant.jpg";
+import pAppleTurnover from "@/assets/p-apple-turnover.jpg";
+import pCheeseDanish from "@/assets/p-cheese-danish.jpg";
+import pMillefeuille from "@/assets/p-millefeuille.jpg";
+import pLemonMeringue from "@/assets/p-lemon-meringue.jpg";
+import pWholewheat from "@/assets/p-wholewheat.jpg";
+import pBrioche from "@/assets/p-brioche.jpg";
+import pShokupan from "@/assets/p-shokupan.jpg";
+import pPretzel from "@/assets/p-pretzel.jpg";
+import pOatmealRaisin from "@/assets/p-oatmeal-raisin.jpg";
+import pShortbread from "@/assets/p-shortbread.jpg";
+import pGingerbread from "@/assets/p-gingerbread.jpg";
+import pSnowball from "@/assets/p-snowball.jpg";
+import pLinzer from "@/assets/p-linzer.jpg";
+import pCoconutMacaroon from "@/assets/p-coconut-macaroon.jpg";
+import pBrownieCookies from "@/assets/p-brownie-cookies.jpg";
 
 export type Category = "kue-ulang-tahun" | "pastry" | "roti" | "kue-kering";
 
@@ -109,7 +135,7 @@ export const products: Product[] = [
     name: "Lemon Drizzle",
     price: 280000,
     category: "kue-ulang-tahun",
-    image: cakeChocolate,
+    image: pLemonDrizzle,
     description: "Kue lemon segar dengan glaze manis-asam.",
   },
   {
@@ -125,7 +151,7 @@ export const products: Product[] = [
     name: "Mocha Praline",
     price: 360000,
     category: "kue-ulang-tahun",
-    image: cakeRedvelvet,
+    image: pMochaPraline,
     description: "Kue mocha dengan praline kacang dan ganache.",
   },
   {
@@ -133,7 +159,7 @@ export const products: Product[] = [
     name: "Vanilla Bean Bliss",
     price: 260000,
     category: "kue-ulang-tahun",
-    image: cakeChocolate,
+    image: pVanillaBean,
     description: "Vanilla bean asli Madagascar dengan buttercream halus.",
   },
   {
@@ -141,7 +167,7 @@ export const products: Product[] = [
     name: "Funfetti Birthday",
     price: 350000,
     category: "kue-ulang-tahun",
-    image: cakeStrawberry,
+    image: pFunfetti,
     description: "Kue ulang tahun penuh sprinkles warna-warni.",
   },
   {
@@ -157,7 +183,7 @@ export const products: Product[] = [
     name: "Pandan Coconut Cake",
     price: 385000,
     category: "kue-ulang-tahun",
-    image: cakeChocolate,
+    image: pPandanCoconut,
     description: "Kue pandan harum dengan kelapa parut segar.",
   },
   {
@@ -165,7 +191,7 @@ export const products: Product[] = [
     name: "Cookies & Cream",
     price: 330000,
     category: "kue-ulang-tahun",
-    image: cakeStrawberry,
+    image: pCookiesCream,
     description: "Kue dengan remahan cookies oreo dan vanilla cream.",
   },
   {
@@ -182,7 +208,7 @@ export const products: Product[] = [
     name: "Hazelnut Ferrero Cake",
     price: 335000,
     category: "kue-ulang-tahun",
-    image: cakeChocolate,
+    image: pHazelnutFerrero,
     description: "Kue hazelnut dengan Ferrero Rocher di atasnya.",
   },
   {
@@ -190,7 +216,7 @@ export const products: Product[] = [
     name: "Mango Passion Cake",
     price: 310000,
     category: "kue-ulang-tahun",
-    image: cakeStrawberry,
+    image: pMangoPassion,
     description: "Mangga dan markisa dengan sponge ringan.",
   },
   {
@@ -230,7 +256,7 @@ export const products: Product[] = [
     name: "Chocolate Lava Heart",
     price: 280000,
     category: "kue-ulang-tahun",
-    image: cakeChocolate,
+    image: pLavaHeart,
     description: "Kue cokelat dengan lava lumer di tengah.",
   },
   {
@@ -311,7 +337,7 @@ export const products: Product[] = [
     name: "Almond Croissant",
     price: 55000,
     category: "pastry",
-    image: cakeTiramisu,
+    image: pAlmondCroissant,
     description: "Croissant dengan filling almond cream dan irisan almond.",
   },
   {
@@ -336,7 +362,7 @@ export const products: Product[] = [
     name: "Apple Turnover",
     price: 70000,
     category: "pastry",
-    image: pastryCroissant,
+    image: pAppleTurnover,
     description: "Pastry isi apel kayu manis yang hangat.",
   },
   {
@@ -344,7 +370,7 @@ export const products: Product[] = [
     name: "Cheese Danish",
     price: 45000,
     category: "pastry",
-    image: cakeTiramisu,
+    image: pCheeseDanish,
     description: "Danish dengan cream cheese dan glaze vanilla.",
   },
   {
@@ -369,7 +395,7 @@ export const products: Product[] = [
     name: "Vanilla Mille-feuille",
     price: 25000,
     category: "pastry",
-    image: pastryCroissant,
+    image: pMillefeuille,
     description: "Pastry tiga lapis dengan vanilla cream.",
   },
   {
@@ -401,7 +427,7 @@ export const products: Product[] = [
     name: "Lemon Meringue Tart",
     price: 80000,
     category: "pastry",
-    image: pastryCroissant,
+    image: pLemonMeringue,
     description: "Tart lemon dengan meringue panggang.",
   },
   {
@@ -514,7 +540,7 @@ export const products: Product[] = [
     name: "Whole Wheat Loaf",
     price: 55000,
     category: "roti",
-    image: breadSourdough,
+    image: pWholewheat,
     description: "Roti gandum utuh sehat dengan biji-bijian.",
   },
   {
@@ -547,7 +573,7 @@ export const products: Product[] = [
     name: "Brioche Loaf",
     price: 40000,
     category: "roti",
-    image: breadSourdough,
+    image: pBrioche,
     description: "Brioche butter yang lembut dan kaya.",
   },
   {
@@ -611,7 +637,7 @@ export const products: Product[] = [
     name: "Milk Bread Japanese",
     price: 35000,
     category: "roti",
-    image: breadSourdough,
+    image: pShokupan,
     description: "Shokupan Jepang yang super lembut.",
   },
   {
@@ -635,7 +661,7 @@ export const products: Product[] = [
     name: "Pretzel Soft",
     price: 40000,
     category: "roti",
-    image: breadSourdough,
+    image: pPretzel,
     description: "Pretzel lembut dengan garam laut.",
   },
   {
@@ -693,7 +719,7 @@ export const products: Product[] = [
     name: "Oatmeal Raisin",
     price: 110000,
     category: "kue-kering",
-    image: cookiesButter,
+    image: pOatmealRaisin,
     description: "Oatmeal cookies dengan kismis manis.",
   },
   {
@@ -701,7 +727,7 @@ export const products: Product[] = [
     name: "Shortbread Scottish",
     price: 80000,
     category: "kue-kering",
-    image: cakeMacaron,
+    image: pShortbread,
     description: "Shortbread Skotlandia yang renyah.",
   },
   {
@@ -741,7 +767,7 @@ export const products: Product[] = [
     name: "Gingerbread Cookies",
     price: 95000,
     category: "kue-kering",
-    image: cookiesButter,
+    image: pGingerbread,
     description: "Cookies jahe dengan icing hias.",
   },
   {
@@ -749,7 +775,7 @@ export const products: Product[] = [
     name: "Snowball Cookies",
     price: 165000,
     category: "kue-kering",
-    image: cakeMacaron,
+    image: pSnowball,
     description: "Cookies bulat dengan icing sugar.",
   },
   {
@@ -757,7 +783,7 @@ export const products: Product[] = [
     name: "Linzer Cookies",
     price: 160000,
     category: "kue-kering",
-    image: cookiesButter,
+    image: pLinzer,
     description: "Linzer dengan jam raspberry di tengah.",
   },
   {
@@ -814,7 +840,7 @@ export const products: Product[] = [
     name: "Coconut Macaroon",
     price: 90000,
     category: "kue-kering",
-    image: cakeMacaron,
+    image: pCoconutMacaroon,
     description: "Macaroon kelapa dengan dasar cokelat.",
   },
   {
@@ -862,7 +888,7 @@ export const products: Product[] = [
     name: "Brownie Cookies",
     price: 165000,
     category: "kue-kering",
-    image: cakeMacaron,
+    image: pBrownieCookies,
     description: "Cookies brownie fudgy dan chewy.",
   },
 ];
