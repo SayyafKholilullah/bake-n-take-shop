@@ -6,6 +6,32 @@ import breadSourdough from "@/assets/bread-sourdough.jpg";
 import cakeRedvelvet from "@/assets/cake-redvelvet.jpg";
 import cakeTiramisu from "@/assets/cake-tiramisu.jpg";
 import cookiesButter from "@/assets/cookies-butter.jpg";
+// New unique product photos (Modern Bold style)
+import pChocolateDream from "@/assets/p-chocolate-dream.jpg";
+import pStrawberryShortcake from "@/assets/p-strawberry-shortcake.jpg";
+import pTiramisuCake from "@/assets/p-tiramisu-cake.jpg";
+import pSaltedCaramel from "@/assets/p-salted-caramel.jpg";
+import pRedvelvetClassic from "@/assets/p-redvelvet-classic.jpg";
+import pMatchaCake from "@/assets/p-matcha-cake.jpg";
+import pBlackforest from "@/assets/p-blackforest.jpg";
+import pRainbowCake from "@/assets/p-rainbow-cake.jpg";
+import pCarrotCake from "@/assets/p-carrot-cake.jpg";
+import pBlueberryCheesecake from "@/assets/p-blueberry-cheesecake.jpg";
+import pButterCroissant from "@/assets/p-butter-croissant.jpg";
+import pPainChocolat from "@/assets/p-pain-chocolat.jpg";
+import pEclairChocolate from "@/assets/p-eclair-chocolate.jpg";
+import pFruitTart from "@/assets/p-fruit-tart.jpg";
+import pCinnamonRoll from "@/assets/p-cinnamon-roll.jpg";
+import pSourdough from "@/assets/p-sourdough.jpg";
+import pRyeBread from "@/assets/p-rye-bread.jpg";
+import pBaguette from "@/assets/p-baguette.jpg";
+import pFocaccia from "@/assets/p-focaccia.jpg";
+import pMacaronBox from "@/assets/p-macaron-box.jpg";
+import pChocchipCookies from "@/assets/p-chocchip-cookies.jpg";
+import pMatchaCookies from "@/assets/p-matcha-cookies.jpg";
+import pButterCookies from "@/assets/p-butter-cookies.jpg";
+import pBiscotti from "@/assets/p-biscotti.jpg";
+import pMadeleine from "@/assets/p-madeleine.jpg";
 
 export type Category = "kue-ulang-tahun" | "pastry" | "roti" | "kue-kering";
 
@@ -32,7 +58,7 @@ export const products: Product[] = [
     name: "Chocolate Dream Cake",
     price: 345000,
     category: "kue-ulang-tahun",
-    image: cakeChocolate,
+    image: pChocolateDream,
     description: "Kue cokelat berlapis tiga dengan ganache premium dan dekorasi elegan.",
     bestseller: true,
   },
@@ -41,7 +67,7 @@ export const products: Product[] = [
     name: "Strawberry Shortcake",
     price: 260000,
     category: "kue-ulang-tahun",
-    image: cakeStrawberry,
+    image: pStrawberryShortcake,
     description: "Kue lembut dengan krim segar dan stroberi pilihan.",
     bestseller: true,
   },
@@ -50,7 +76,7 @@ export const products: Product[] = [
     name: "Red Velvet Classic",
     price: 245000,
     category: "kue-ulang-tahun",
-    image: cakeRedvelvet,
+    image: pRedvelvetClassic,
     description: "Red velvet klasik dengan cream cheese frosting yang lembut.",
   },
   {
@@ -58,7 +84,7 @@ export const products: Product[] = [
     name: "Black Forest Royale",
     price: 360000,
     category: "kue-ulang-tahun",
-    image: cakeChocolate,
+    image: pBlackforest,
     description: "Kue cokelat dengan cherry segar dan whipped cream.",
   },
   {
@@ -66,7 +92,7 @@ export const products: Product[] = [
     name: "Rainbow Layer Cake",
     price: 285000,
     category: "kue-ulang-tahun",
-    image: cakeStrawberry,
+    image: pRainbowCake,
     description: "Tujuh lapis warna pelangi dengan vanilla buttercream.",
   },
   {
@@ -74,7 +100,7 @@ export const products: Product[] = [
     name: "Tiramisu Cake",
     price: 280000,
     category: "kue-ulang-tahun",
-    image: cakeRedvelvet,
+    image: pTiramisuCake,
     description: "Kue tiramisu dengan mascarpone dan espresso autentik.",
     bestseller: true,
   },
@@ -91,7 +117,7 @@ export const products: Product[] = [
     name: "Carrot Walnut Cake",
     price: 265000,
     category: "kue-ulang-tahun",
-    image: cakeStrawberry,
+    image: pCarrotCake,
     description: "Kue wortel dengan kenari dan cream cheese frosting.",
   },
   {
@@ -123,7 +149,7 @@ export const products: Product[] = [
     name: "Matcha Green Tea Cake",
     price: 360000,
     category: "kue-ulang-tahun",
-    image: cakeRedvelvet,
+    image: pMatchaCake,
     description: "Kue matcha premium Jepang dengan azuki bean.",
   },
   {
@@ -147,7 +173,7 @@ export const products: Product[] = [
     name: "Salted Caramel Cake",
     price: 255000,
     category: "kue-ulang-tahun",
-    image: cakeRedvelvet,
+    image: pSaltedCaramel,
     description: "Lapisan caramel asin dengan butter cake lembut.",
     bestseller: true,
   },
@@ -172,7 +198,7 @@ export const products: Product[] = [
     name: "Blueberry Cheesecake",
     price: 250000,
     category: "kue-ulang-tahun",
-    image: cakeRedvelvet,
+    image: pBlueberryCheesecake,
     description: "Cheesecake klasik dengan topping blueberry segar.",
   },
   {
@@ -276,7 +302,7 @@ export const products: Product[] = [
     name: "Butter Croissant",
     price: 65000,
     category: "pastry",
-    image: pastryCroissant,
+    image: pButterCroissant,
     description: "Croissant renyah berlapis-lapis dengan mentega Prancis premium.",
     bestseller: true,
   },
@@ -293,7 +319,7 @@ export const products: Product[] = [
     name: "Pain au Chocolat",
     price: 40000,
     category: "pastry",
-    image: pastryCroissant,
+    image: pPainChocolat,
     description: "Pastry Prancis dengan dua batang cokelat dark.",
     bestseller: true,
   },
@@ -334,7 +360,7 @@ export const products: Product[] = [
     name: "Eclair Chocolate",
     price: 90000,
     category: "pastry",
-    image: cakeTiramisu,
+    image: pEclairChocolate,
     description: "Eclair klasik dengan cream patissière dan glaze cokelat.",
     bestseller: true,
   },
@@ -351,7 +377,7 @@ export const products: Product[] = [
     name: "Cinnamon Roll",
     price: 85000,
     category: "pastry",
-    image: cakeTiramisu,
+    image: pCinnamonRoll,
     description: "Cinnamon roll lembut dengan cream cheese glaze.",
   },
   {
@@ -367,7 +393,7 @@ export const products: Product[] = [
     name: "Fruit Tart",
     price: 35000,
     category: "pastry",
-    image: cakeTiramisu,
+    image: pFruitTart,
     description: "Tart dengan vanilla custard dan buah segar.",
   },
   {
@@ -479,7 +505,7 @@ export const products: Product[] = [
     name: "Sourdough Artisan",
     price: 60000,
     category: "roti",
-    image: breadSourdough,
+    image: pSourdough,
     description: "Roti sourdough dengan fermentasi alami 24 jam.",
     bestseller: true,
   },
@@ -496,7 +522,7 @@ export const products: Product[] = [
     name: "French Baguette",
     price: 35000,
     category: "roti",
-    image: breadSourdough,
+    image: pBaguette,
     description: "Baguette Prancis renyah klasik.",
   },
   {
@@ -512,7 +538,7 @@ export const products: Product[] = [
     name: "Rye Bread",
     price: 75000,
     category: "roti",
-    image: breadSourdough,
+    image: pRyeBread,
     description: "Roti rye dark dengan caraway seeds.",
     bestseller: true,
   },
@@ -537,7 +563,7 @@ export const products: Product[] = [
     name: "Focaccia Rosemary",
     price: 40000,
     category: "roti",
-    image: breadSourdough,
+    image: pFocaccia,
     description: "Focaccia dengan rosemary dan olive oil.",
   },
   {
@@ -641,7 +667,7 @@ export const products: Product[] = [
     name: "French Macaron Box",
     price: 95000,
     category: "kue-kering",
-    image: cakeMacaron,
+    image: pMacaronBox,
     description: "Set 12 macaron dengan berbagai rasa.",
     bestseller: true,
   },
@@ -650,7 +676,7 @@ export const products: Product[] = [
     name: "Butter Cookies Tin",
     price: 125000,
     category: "kue-kering",
-    image: cookiesButter,
+    image: pButterCookies,
     description: "Aneka kue mentega dalam kaleng premium.",
   },
   {
@@ -658,7 +684,7 @@ export const products: Product[] = [
     name: "Chocolate Chip Cookies",
     price: 155000,
     category: "kue-kering",
-    image: cakeMacaron,
+    image: pChocchipCookies,
     description: "Cookies klasik dengan chunks cokelat besar.",
     bestseller: true,
   },
@@ -683,7 +709,7 @@ export const products: Product[] = [
     name: "Almond Biscotti",
     price: 110000,
     category: "kue-kering",
-    image: cookiesButter,
+    image: pBiscotti,
     description: "Biscotti almond Italia untuk kopi.",
   },
   {
@@ -691,7 +717,7 @@ export const products: Product[] = [
     name: "Madeleine Vanilla",
     price: 110000,
     category: "kue-kering",
-    image: cakeMacaron,
+    image: pMadeleine,
     description: "Madeleine bentuk shell klasik Prancis.",
   },
   {
@@ -755,7 +781,7 @@ export const products: Product[] = [
     name: "Matcha Cookies",
     price: 150000,
     category: "kue-kering",
-    image: cakeMacaron,
+    image: pMatchaCookies,
     description: "Cookies matcha hijau dengan white choc chips.",
     bestseller: true,
   },
